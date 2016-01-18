@@ -6,6 +6,16 @@
         <compilerflag value="-I${NATIVE_TOOLKIT_PATH}/openal/OpenAL32/include/"/>
         <compilerflag value="-DAL_LIBTYPE_STATIC" if="native_toolkit_openal_static" />
 
+	<compilerflag value="-msse" if="mingw"/>
+	<compilerflag value="-msse2" if="mingw"/>
+	<compilerflag value="-msse3" if="mingw"/>
+	<compilerflag value="-mmmx" if="mingw"/>
+	<compilerflag value="-Dpthread_key_create=pthread_key_create_func" if="mingw"/>
+	<compilerflag value="-Dpthread_key_delete=pthread_key_delete_func" if="mingw"/>
+	<compilerflag value="-Dpthread_getspecific=pthread_getspecific_func" if="mingw"/>
+	<compilerflag value="-Dpthread_setspecific=pthread_setspecific_func" if="mingw"/>
+	<compilerflag value="-Dpthread_once=pthread_once_func" if="mingw"/>
+
         <file name="${NATIVE_TOOLKIT_PATH}/openal/OpenAL32/alAuxEffectSlot.c"/>
         <file name="${NATIVE_TOOLKIT_PATH}/openal/OpenAL32/alBuffer.c"/>
         <file name="${NATIVE_TOOLKIT_PATH}/openal/OpenAL32/alEffect.c"/>
