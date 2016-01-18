@@ -43,10 +43,20 @@
 	#define ALC_API
 
 	// Why does cmake need this?
+	#ifdef __MINGW32__
+	#define SIZEOF_LONG 4 /* should work for 32 and 64 bits */
+	#define SIZEOF_LONG_LONG 8 /* should work for 32 and 64 bits */
+	#define ALIGN(x) __attribute__((aligned(x)))
+	#define align(x) aligned(x)
+	#define HAVE_PTHREAD_SETSCHEDPARAM
+	#else
 	#define SIZEOF_LONG sizeof(long)
 	#define SIZEOF_LONG_LONG sizeof(long long)
-
 	#define ALIGN(x) __declspec(align(x))
+	#define strcasecmp _stricmp
+	#define strncasecmp _strnicmp
+	#endif
+
 	#define RESTRICT __restrict
 	#define HAVE__ALIGNED_MALLOC
 	#define HAVE_SSE
@@ -67,8 +77,6 @@
 		#define HAVE___CONTROL87_2
 	#endif
 
-	#define strcasecmp _stricmp
-	#define strncasecmp _strnicmp
 #if defined(_MSC_VER) && _MSC_VER <1900
 	#define snprintf _snprintf
 #endif
